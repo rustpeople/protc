@@ -1,4 +1,9 @@
+#[cfg(target_os = "linux")]
+use std::os::unix::net::{UnixStream as TcpStream, UnixListener as TcpListener};
+
+#[cfg(not(target_os = "linux"))]
 use std::net::{TcpStream, TcpListener};
+
 use std::io::Result as IoResult;
 use core::fmt::Display;
 
@@ -19,9 +24,3 @@ pub fn client<D: Display, F: Fn(&mut TcpStream) -> IoResult<()>>(host: D, port: 
     handle(&mut stream)?;
     Ok(())
 }
-
-// I think we've finished tcp
-// We'll implement http (and all versions)
-// We need http, ftp, ...
-// You're right
-// See src/http/v1_1.rs

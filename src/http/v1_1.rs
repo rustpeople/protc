@@ -146,16 +146,18 @@ impl core::fmt::Display for Response {
 }
 
 // same as tcp, but handle takes a Request and returns a Response
+#[cfg(target_os = "linux")]
+use std::os::unix::net::{UnixStream as TcpStream, UnixListener as TcpListener};
 
-use std::net::{TcpListener, TcpStream};
+#[cfg(not(target_os = "linux"))]
+use std::net::{TcpStream, TcpListener};
 use std::io::{Result as IoResult, Read, Write};
 use core::fmt::Display;
 
 pub fn server<D: Display, F: Fn(Request) -> Response>(host: D, port: u16, handle: F) -> IoResult<()> {
     let listener = TcpListener::bind(format!("{}:{}", host, port))?;
 
-    for stream in listener.incoming() {
-        let mut stream = stream?;
+    for (mut stream, _) in listener.accept()? {
         let mut data = String::new();
         stream.read_to_string(&mut data)?;
         let request = Request::parse(data).unwrap();
@@ -174,5 +176,3 @@ pub fn client<D: Display>(host: D, port: u16, request: Request) -> IoResult<Resp
     stream.read_to_string(&mut data)?;
     Ok(Response::parse(data).unwrap())
 }
-
-// https://httpwg.org/specs/rfc9112.html
