@@ -10,13 +10,11 @@ use core::fmt::Display;
 pub fn server<D: Display, F: Fn(&mut TcpStream) -> IoResult<()>>(host: D, port: u16, handle: F) -> IoResult<()> {
     let listener = TcpListener::bind(format!("{}:{}", host, port))?;
 
-    for stream in listener.incoming() {
-        let mut stream = stream?;
+    loop {
+        let (mut stream, _) = listener.accept()?;
 
         handle(&mut stream)?;
     }
-
-    Ok(())
 }
 
 pub fn client<D: Display, F: Fn(&mut TcpStream) -> IoResult<()>>(host: D, port: u16, handle: F) -> IoResult<()> {

@@ -157,7 +157,8 @@ use core::fmt::Display;
 pub fn server<D: Display, F: Fn(Request) -> Response>(host: D, port: u16, handle: F) -> IoResult<()> {
     let listener = TcpListener::bind(format!("{}:{}", host, port))?;
 
-    for (mut stream, _) in listener.accept()? {
+    loop {
+        let (mut stream, _) = listener.accept()?;
         let mut data = String::new();
         stream.read_to_string(&mut data)?;
         let request = Request::parse(data).unwrap();
@@ -165,8 +166,6 @@ pub fn server<D: Display, F: Fn(Request) -> Response>(host: D, port: u16, handle
         stream.write_all(response.to_string().as_bytes())?;
         stream.flush()?;
     }
-
-    Ok(())
 }
 
 pub fn client<D: Display>(host: D, port: u16, request: Request) -> IoResult<Response> {
