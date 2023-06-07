@@ -3,8 +3,7 @@ name = "protc"
 version = "0.1.0"
 edition = "2021"
 authors = [ "TadaHrd <hrudka.tadeas@gmail.com>", "Antônio Breno <antoniobgc10@gmail.com>" ]
-description = """
-"""
+description = ""
 readme = "README.md"
 repository = "https://github.com/rustpeople/protc"
 
@@ -18,3 +17,4 @@ name = "protc"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+thiserror = "1.0" # Added by TadaHrd at around 20:00 GMT+1 7.6.2023 (D.M.YYYY)
