@@ -1,7 +1,7 @@
 [package]
 name = "protc"
 version = "0.1.0"
-edition = "2023"
+edition = "2021"
 authors = [ "TadaHrd <hrudka.tadeas@gmail.com>", "Antônio Breno <antoniobgc10@gmail.com>" ]
 description = """
 """
@@ -14,10 +14,6 @@ path = "src/lib.rs"
 
 [[bin]]
 name = "protc"
-
-[[test]]
-
-[[example]]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
