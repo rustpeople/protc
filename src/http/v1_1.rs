@@ -167,6 +167,7 @@ pub fn server<D: Display, F: Fn(Request) -> Response>(host: D, port: u16, handle
 pub fn client<D: Display>(host: D, port: u16, request: Request) -> IoResult<Response> {
     let mut stream = TcpStream::connect(format!("{}:{}", host, port))?;
     stream.write_all(request.to_string().as_bytes())?;
+    stream.flush()?;
     let mut data = String::new();
     stream.read_to_string(&mut data)?;
     Ok(Response::parse(data).unwrap())
