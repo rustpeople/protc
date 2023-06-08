@@ -146,10 +146,6 @@ impl core::fmt::Display for Response {
 }
 
 // same as tcp, but handle takes a Request and returns a Response
-#[cfg(target_os = "linux")]
-use std::os::unix::net::{UnixStream as TcpStream, UnixListener as TcpListener};
-
-#[cfg(not(target_os = "linux"))]
 use std::net::{TcpStream, TcpListener};
 use std::io::{Result as IoResult, Read, Write};
 use core::fmt::Display;

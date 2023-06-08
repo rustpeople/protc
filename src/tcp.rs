@@ -1,7 +1,3 @@
-#[cfg(target_os = "linux")]
-use std::os::unix::net::{UnixStream as TcpStream, UnixListener as TcpListener};
-
-#[cfg(not(target_os = "linux"))]
 use std::net::{TcpStream, TcpListener};
 
 use std::io::Result as IoResult;
