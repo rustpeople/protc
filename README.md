@@ -3,6 +3,8 @@ A rust crate for dealing with many networking protocols.
 
 # Roadmap
 
+**Disclaimer**: the roadmap doesn't need to be followed in order.
+
 [x] TCP
 [x] HTTP/1.1
 [ ] HTTP/2.0 and HTTP/3.0
@@ -24,4 +26,5 @@ A rust crate for dealing with many networking protocols.
 [ ] SSH
 [ ] NTP
 [ ] Secure versions of all protocols listed above
+[ ] MUSIP (Music Transfer Protocol) (Created by Antônio Breno)
 [ ] And more... You can suggest other protocols by contacitng us.
