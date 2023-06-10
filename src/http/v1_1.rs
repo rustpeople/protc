@@ -150,7 +150,17 @@ use std::net::{TcpStream, TcpListener};
 use std::io::{Result as IoResult, Read, Write};
 use core::fmt::Display;
 
-pub fn server<D: Display, F: Fn(Request) -> Response>(host: D, port: u16, handle: F) -> IoResult<()> {
+fn server_handle<F: (Fn(Request) -> Response) + Sync + Send + 'static>(stream: &mut TcpStream, handle: F) -> IoResult<()> {
+    let mut data = String::new();
+    stream.read_to_string(&mut data)?;
+    let request = Request::parse(data).unwrap();
+    let response = handle(request);
+    stream.write_all(response.to_string().as_bytes())?;
+    stream.flush()?;
+    Ok(())
+}
+
+pub fn server<D: Display, F: (Fn(Request) -> Response) + Sync + Send + 'static>(host: D, port: u16, handle: F) -> IoResult<()> {
     let listener = TcpListener::bind(format!("{}:{}", host, port))?;
 
     loop {
