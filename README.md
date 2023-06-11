@@ -28,5 +28,5 @@ A rust crate for dealing with many networking protocols.
 [ ] Secure versions of all protocols listed above (Using TLS)
 [ ] MUSIP (Music Transfer Protocol) (Created by Antônio Breno)
 [ ] MP (Messaging Protocol) (Created by Antônio Breno)
-[ ] ASecure (an encryption algorithm for network streams) (Created by Antônio Breno)
+[x] ASecure (an encryption algorithm for network streams) (Created by Antônio Breno)
 [ ] And more... You can suggest other protocols by contacitng us.
