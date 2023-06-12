@@ -7,7 +7,8 @@ A rust crate for dealing with many networking protocols.
 
 - [x] TCP
 - [x] HTTP/1.1
-- [ ] HTTP/2.0 and HTTP/3.0
+- [ ] HTTP/2.0
+- [ ] HTTP/3.0
 - [ ] FTP
 - [ ] UDP
 - [ ] Secure version of TCP (Using TLS)
